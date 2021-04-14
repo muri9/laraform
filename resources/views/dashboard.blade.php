@@ -9,20 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+                    <p>
+                    Empty Dashboard
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-
-    <ul>
-        <?php
-        /** @var \App\Models\Claim $item */
-        /** @var array $items */
-        foreach ($items as $item): ?>
-        <li><p><?= $item->title; ?></p>
-            <span><?= $item->message; ?></span>
-        </li>
-        <?php endforeach; ?>
-    </ul>
 </x-app-layout>

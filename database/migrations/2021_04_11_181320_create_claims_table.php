@@ -15,9 +15,13 @@ class CreateClaimsTable extends Migration
     {
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->unsignedBigInteger('user_id');
+            $table->string('subject');
             $table->text('message');
+            $table->boolean('mark')->default(false);
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')->on('users');
         });
     }
 

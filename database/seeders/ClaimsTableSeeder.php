@@ -15,7 +15,7 @@ class ClaimsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('claims')->truncate();
+        DB::table('claims')->delete();
         \App\Models\Claim::factory(10)->create();
     }
 }

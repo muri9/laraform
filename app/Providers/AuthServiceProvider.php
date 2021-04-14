@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Claim;
 use App\Models\Role;
 use App\Models\User;
+use App\Policies\ClaimPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Claim::class => ClaimPolicy::class,
     ];
 
     /**
@@ -28,10 +30,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // https://laravel.com/docs/8.x/authorization#writing-gates
-        Gate::define('create-claim', function (User $user) {
+        Gate::define('claims-create', function (User $user) {
             return $user->hasRole(Role::CLIENT);
         });
-        Gate::define('view-claims', function (User $user) {
+        Gate::define('claims-update', function (User $user) {
+            return $user->hasRole(Role::CLIENT);
+        });
+        Gate::define('claims-index', function (User $user) {
             return $user->hasRole(Role::MANAGER);
         });
     }

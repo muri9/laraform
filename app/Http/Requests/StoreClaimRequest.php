@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreClaimRequest extends FormRequest
 {
@@ -13,6 +15,9 @@ class StoreClaimRequest extends FormRequest
      */
     public function authorize()
     {
+        if(Auth::check())
+            return Auth::user()->hasRole(Role::CLIENT);
+
         return false;
     }
 
@@ -24,7 +29,8 @@ class StoreClaimRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'subject' => 'required|max:255',
+            'message' => 'required',
         ];
     }
 }

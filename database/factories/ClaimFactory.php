@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Claim;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ClaimFactory extends Factory
@@ -21,9 +22,12 @@ class ClaimFactory extends Factory
      */
     public function definition()
     {
+        $user = User::where('email','client@example.com')->first();
         return [
-            'title' => $this->faker->firstName,
-            'message' => $this->faker->realText(),
+            'user_id' => $user->id,
+            'subject' => $this->faker->realText(30),
+            'message' => $this->faker->realTextBetween(100,300),
+            'mark' => $this->faker->boolean,
         ];
     }
 }
