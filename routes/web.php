@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -21,11 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
 
     // your routes
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('home');
+    Route::get('/', [HomeController::class, 'index'])
+        ->name('home');
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])
+    Route::get('/dashboard', [HomeController::class, 'index'])
         ->name('dashboard');
 
     Route::get('/claims', [ClaimController::class, 'index'])
@@ -40,11 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/claims/{claim}/show', [ClaimController::class, 'show'])
         ->name('claims.show');
 
-    Route::get('/claims/{id}/destroy', [ClaimController::class, 'destroy'])
-        ->name('claims.destroy');
-
-    Route::get('/claims/{id}/update', [ClaimController::class, 'update'])
-        ->name('claims.update');
+    Route::get('/claims/{claim}/mark', [ClaimController::class, 'mark'])
+        ->name('claims.mark');
 });
 
 require __DIR__ . '/auth.php';

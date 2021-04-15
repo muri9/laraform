@@ -18,6 +18,7 @@ class CreateClaimsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('subject');
             $table->text('message');
+            $table->string('file')->nullable();
             $table->boolean('mark')->default(false);
             $table->timestamps();
             $table->foreign('user_id')

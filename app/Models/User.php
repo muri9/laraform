@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->roles()->where('code', $role)->exists();
     }
 
-    public function assignRole($id) {
-        $this->roles()->attach($id);
+    public function assignRole(Role $role) {
+        $this->roles()->attach($role);
     }
 }

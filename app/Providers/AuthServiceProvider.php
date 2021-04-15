@@ -34,15 +34,10 @@ class AuthServiceProvider extends ServiceProvider
 
         // https://laravel.com/docs/8.x/authorization#writing-gates
         Gate::define('claims-create', function (User $user) {
-            if ($user->hasRole(Role::CLIENT)) {
-                $count = Auth::user()->claims()->where('created_at', '>=', Carbon::today())->count();
-                if ($count >= 1)
-                    return Response::deny('You can create claim once a day');
-            }
-            return Response::allow();
+            return $user->hasRole(Role::CLIENT);
         });
 
-        Gate::define('claims-update', function (User $user) {
+        Gate::define('claims-mark', function (User $user) {
             return $user->hasRole(Role::MANAGER);
         });
 

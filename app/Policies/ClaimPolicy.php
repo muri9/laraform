@@ -34,7 +34,8 @@ class ClaimPolicy
      */
     public function view(User $user, Claim $claim)
     {
-        //
+        if ($user->hasRole(Role::MANAGER))
+            return Response::allow();
     }
 
     /**
@@ -45,12 +46,14 @@ class ClaimPolicy
      */
     public function create(User $user)
     {
-        if ($user->hasRole(Role::CLIENT)) {
-            $count = Auth::user()->claims()->where('created_at', '>=', Carbon::today())->count();
-            if ($count >= 1)
-                Response::deny('You can create claim once a day');
-        }
-        Response::allow();
+        if ($user->hasRole(Role::ADMIN))
+            return Response::allow();
+
+        $count = $user->claims()->where('created_at', '>=', Carbon::today())->count();
+        if ($count >= 1)
+            return Response::deny('You can create claim once a day');
+
+        return Response::allow();
     }
 
     /**

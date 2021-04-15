@@ -31,6 +31,7 @@ class StoreClaimRequest extends FormRequest
         return [
             'subject' => 'required|max:255',
             'message' => 'required',
+            'file' => 'file'
         ];
     }
 }

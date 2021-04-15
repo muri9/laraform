@@ -19,16 +19,40 @@
                     <x-auth-validation-errors class="mb-4" :errors="$errors"/>
                     <table class="bg-white">
                         <tr>
-                            <th class="border px-4 py-2">ID</th>
-                            <th class="border px-4 py-2">{{ $claim->id }}</th>
+                            <td class="border px-2 py-1 text-right">ID</td>
+                            <td class="border px-2 py-1">{{ $claim->id }}</td>
                         </tr>
                         <tr>
-                            <td class="border px-4 py-2">Subject</td>
-                            <td class="border px-4 py-2">{{ $claim->subject }}</td>
+                            <td class="border px-2 py-1 text-right">Date</td>
+                            <td class="border px-2 py-1">{{ $claim->created_at }}</td>
                         </tr>
                         <tr>
-                            <td class="border px-4 py-2">Message</td>
-                            <td class="border px-4 py-2">{{ $claim->message }}</td>
+                            <td class="border px-2 py-1 text-right">Name</td>
+                            <td class="border px-2 py-1">{{ $claim->user->name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-2 py-1 text-right">Email</td>
+                            <td class="border px-2 py-1">{{ $claim->user->email }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-2 py-1 text-right">Subject</td>
+                            <td class="border px-2 py-1">{{ $claim->subject }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-2 py-1 text-right">Message</td>
+                            <td class="border px-2 py-1"><span>{{ $claim->message }}</span></td>
+                        </tr>
+                        <tr>
+                            <td class="border px-2 py-1 text-right">Read</td>
+                            <td class="border px-2 py-1">
+                                @if ($claim->mark)
+                                    ✔
+                                @else
+                                    <a href="{{route('claims.mark', $claim)}}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 p-1 rounded inline-flex items-center">
+                                        <span>Mark as read</span>
+                                    </a>
+                                @endif
+                            </td>
                         </tr>
                     </table>
                 </div>

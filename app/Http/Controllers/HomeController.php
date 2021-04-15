@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Claim;
 use App\Models\Role;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
-class DashboardController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return RedirectResponse
      */
     public function index()
     {
@@ -28,11 +29,11 @@ class DashboardController extends Controller
 
     public function manager()
     {
-        return view('dashboard.manager');
+        return Redirect::route('claims.index');
     }
 
     public function client()
     {
-        return view('dashboard.client');
+        return Redirect::route('claims.create');
     }
 }

@@ -46,7 +46,9 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
-
+                    <a class="ml-3 underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                        Sign up!
+                    </a>
                 <x-button class="ml-3">
                     {{ __('Log in') }}
                 </x-button>
