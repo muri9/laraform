@@ -3,8 +3,12 @@
 namespace App\Policies;
 
 use App\Models\Claim;
+use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ClaimPolicy
 {
@@ -37,11 +41,16 @@ class ClaimPolicy
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
-     * @return mixed
+     * @return \Illuminate\Auth\Access\Response
      */
     public function create(User $user)
     {
-        //
+        if ($user->hasRole(Role::CLIENT)) {
+            $count = Auth::user()->claims()->where('created_at', '>=', Carbon::today())->count();
+            if ($count >= 1)
+                Response::deny('You can create claim once a day');
+        }
+        Response::allow();
     }
 
     /**

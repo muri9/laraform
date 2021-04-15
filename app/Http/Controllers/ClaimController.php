@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClaimRequest;
 use App\Models\Claim;
 use App\Models\Role;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,14 @@ class ClaimController extends Controller
      */
     public function index()
     {
-        $this->authorize('claims-index', Claim::class);
-        $items = Claim::all();
-        return view('claims.index', ['items' => $items]);
+        $user = Auth::user();
+        if ($user->hasRole(Role::ADMIN) || $user->hasRole(Role::MANAGER)) {
+            $items = Claim::all();
+            return view('claims.index', ['items' => $items]);
+        }
+
+        $items = Claim::where('user_id', $user->id)->get();
+        return view('claims.owned', ['items' => $items]);
     }
 
     /**
@@ -51,8 +57,7 @@ class ClaimController extends Controller
         $claim->mark = false;
         $claim->save();
 
-
-        //return $this->show($claim);
+        //return view('claims.show', ['claim'=>$claim]);
         return redirect()->action( [self::class, 'show'], $claim)
         ->with('status', 'Claim saved!');
     }

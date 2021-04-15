@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Claim;
 use App\Models\Role;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -17,19 +16,23 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->hasRole(Role::ADMIN)) {
-            $items = Claim::all();
-            return view('claims.index', ['items' => $items]);
-        }
-        if ($user->hasRole(Role::MANAGER)) {
-            $items = Claim::all();
-            return view('claims.index', ['items' => $items]);
-        }
-        if ($user->hasRole(Role::CLIENT)) {
-            $items = Claim::where('user_id', $user->id)->get();
-            return view('claims.client-index', ['items' => $items]);
-        }
+        if ($user->hasRole(Role::ADMIN)) return $this->admin();
+        if ($user->hasRole(Role::MANAGER)) return $this->manager();
+        return $this->client();
+    }
 
-        return view('dashboard');
+    public function admin()
+    {
+        return view('dashboard.admin');
+    }
+
+    public function manager()
+    {
+        return view('dashboard.manager');
+    }
+
+    public function client()
+    {
+        return view('dashboard.client');
     }
 }

@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             My claims
         </h2>
-        <x-nav-link :href="route('claims.create')" :active="request()->routeIs('claims.create')">
+        <x-nav-link :href="route('claims.create')">
             Create Claim
         </x-nav-link>
     </x-slot>
@@ -24,13 +24,17 @@
                         <tbody>
                         @forelse ($items as $item)
                             <tr>
-                                <td class="border px-4 py-2">{{ $item->id }}</td>
+                                <td class="border px-4 py-2">
+                                    <a class="underline" href="{{route('claims.show', $item)}}">{{ $item->id }}</a>
+                                </td>
                                 <td class="border px-4 py-2">{{ $item->subject }}</td>
                                 <td class="border px-4 py-2">{{ $item->user->email }}</td>
                                 <td class="border px-4 py-2">{{ $item->mark }}</td>
                             </tr>
                         @empty
-                            <tr><td>No claims</td></tr>
+                            <tr>
+                                <td>No claims</td>
+                            </tr>
                         @endforelse
                         </tbody>
                     </table>

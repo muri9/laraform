@@ -17,7 +17,8 @@ https://tokmakov.msk.ru/blog/tags/314
 `php artisan db:seed --class=ClaimsTableSeeder`  
 `php artisan migrate:refresh --seed`  
 `php artisan make:factory ClaimFactory --model=Claim`  
-`php artisan config:cache`
+`php artisan config:cache`  
+`php artisan make:policy ClaimPolicy --model=Claim`
 
 ### deploy
 install vendors `composer install`  

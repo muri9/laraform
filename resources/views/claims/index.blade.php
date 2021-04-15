@@ -22,7 +22,9 @@
                         <tbody>
                         @forelse ($items as $item)
                             <tr>
-                                <td class="border px-4 py-2">{{ $item->id }}</td>
+                                <td class="border px-4 py-2">
+                                    <a class="underline" href="{{route('claims.show', $item)}}">{{ $item->id }}</a>
+                                </td>
                                 <td class="border px-4 py-2">{{ $item->subject }}</td>
                                 <td class="border px-4 py-2">{{ $item->user->email }}</td>
                                 <td class="border px-4 py-2">{{ $item->mark }}</td>

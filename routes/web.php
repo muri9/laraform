@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,37 +18,33 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth']);
+    // your routes
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('home');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
-Route::get('/claims', [ClaimController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('claims.index');
+    Route::get('/claims', [ClaimController::class, 'index'])
+        ->name('claims.index');
 
-Route::get('/claims/create', [ClaimController::class, 'create'])
-    ->middleware(['auth'])
-    ->name('claims.create');
+    Route::get('/claims/create', [ClaimController::class, 'create'])
+        ->name('claims.create');
 
-Route::post('/claims/store', [ClaimController::class, 'store'])
-    ->middleware(['auth'])
-    ->name('claims.store');
+    Route::post('/claims/store', [ClaimController::class, 'store'])
+        ->name('claims.store');
 
-Route::get('/claims/{claim}/show', [ClaimController::class, 'show'])
-    ->middleware(['auth'])
-    ->name('claims.show');
+    Route::get('/claims/{claim}/show', [ClaimController::class, 'show'])
+        ->name('claims.show');
 
-Route::get('/claims/{id}/destroy', [ClaimController::class, 'destroy'])
-    ->middleware(['auth'])
-    ->name('claims.destroy');
+    Route::get('/claims/{id}/destroy', [ClaimController::class, 'destroy'])
+        ->name('claims.destroy');
 
-Route::get('/claims/{id}/update', [ClaimController::class, 'update'])
-    ->middleware(['auth'])
-    ->name('claims.update');
+    Route::get('/claims/{id}/update', [ClaimController::class, 'update'])
+        ->name('claims.update');
+});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -3,6 +3,9 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Create Claim
         </h2>
+        <x-nav-link :href="route('claims.index')">
+            <- Claims list
+        </x-nav-link>
     </x-slot>
 
     <!-- Session Status -->
