@@ -2,8 +2,8 @@
 
 1. Установить проект  
    `git clone https://github.com/muri9/laraform`
-   `composer install`  
    `cd laraform`
+   `composer install`  
 1. Запустить контейнер с БД  
    `docker-compose up -d`  
    или настроить в .env подключение к своей БД
