@@ -1,8 +1,8 @@
 ## Инструкция по развертыванию
 
 1. Установить проект  
-   `git clone https://github.com/muri9/laraform`
-   `cd laraform`
+   `git clone https://github.com/muri9/laraform`  
+   `cd laraform`  
    `composer install`  
 1. Запустить контейнер с БД  
    `docker-compose up -d`  
