@@ -1,5 +1,6 @@
 {
     "name": "muri9/laraform",
+    "version": "1.0",
     "type": "project",
     "description": "Laravel experiments",
     "keywords": ["laravel"],
