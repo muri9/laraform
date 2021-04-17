@@ -1,0 +1,11 @@
+{
+    "require": {
+        "muri9/laraform": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:muri9/laraform.git"
+        }
+    ]
+}
