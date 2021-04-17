@@ -1,8 +1,9 @@
 ## Инструкция по развертыванию
 
 1. Установить проект  
-    `composer create-project muri9/laraform laraform`  
-    `cd example-app`
+   `git clone https://github.com/muri9/laraform`
+   `composer install`  
+   `cd laraform`
 1. Запустить контейнер с БД  
    `docker-compose up -d`  
    или настроить в .env подключение к своей БД

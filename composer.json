@@ -1,6 +1,5 @@
 {
     "name": "muri9/laraform",
-    "version": "1.0",
     "type": "project",
     "description": "Laravel experiments",
     "keywords": ["laravel"],
@@ -42,6 +41,9 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "post-package-install": [
             "@php artisan key:generate --ansi"
         ]
     },
