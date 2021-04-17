@@ -1,12 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +25,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'index'])
         ->name('dashboard');
+
+    Route::get('/users', [UserController::class, 'index'])
+        ->name('users.index');
+
+    Route::get('/users/{user}/show', [UserController::class, 'show'])
+        ->name('users.show');
+
+    Route::get('/users/{user}/{role}', [UserController::class, 'role'])
+        ->name('users.role');
+
+    Route::get('/roles', [RoleController::class, 'index'])
+        ->name('roles.index');
 
     Route::get('/claims', [ClaimController::class, 'index'])
         ->name('claims.index');

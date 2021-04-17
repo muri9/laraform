@@ -1,31 +1,33 @@
-### manuals
-https://cli.github.com/manual/  
-https://laravel.com/docs/8.x#installation-via-composer  
-https://laravel.com/docs/8.x/authentication  
-https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-ru
-https://dev.to/zaxwebs/implementing-simple-role-based-authorization-in-laravel-8-using-gates-1n44
-https://tokmakov.msk.ru/blog/tags/314
+## Инструкция по развертыванию
 
-### used commands
+1. Установить проект  
+    `composer create-project muri9/laraform laraform`  
+    `cd example-app`
+1. Запустить контейнер с БД  
+   `docker-compose up -d`  
+   или настроить в .env подключение к своей БД
+1. Выполнить миграции  
+`php artisan config:clear`  
+`php artisan migrate`
+1. Запустить веб сервер, если требуется  
+`php artisan serve`
 
-`php artisan migrate`  
-`php artisan migrate:rollback`  
-`php artisan make:model Role`  
-`php artisan make:migration migration_name`  
-`php artisan make:model Claim -mcr`  
-`php artisan make:seeder ClaimsTableSeeder`  
-`php artisan db:seed --class=ClaimsTableSeeder`  
-`php artisan migrate:refresh --seed`  
-`php artisan make:factory ClaimFactory --model=Claim`  
-`php artisan config:cache`  
-`php artisan make:policy ClaimPolicy --model=Claim`
+Логин и пароль менеджера  
+`manager@example.com manager-pw`  
+Логин и пароль админа  
+`admin@example.com admin-pw`  
+Можно изменить в .env
 
-### deploy
-install vendors `composer install`  
-run mysql docker `docker-compose up -d`  
-migrate `php artisan migrate`  
-run web `php artisan serve`
-##Тестовое задание:
+###Что сделано:
+- Установлен laravel-breeze (auth, оформленный как starter-kit) 
+- Создана табличка ролей с belongsToMany через промежуточную таблицу
+- В миграциях созданы пользователи admin и manager, назначены соотв. роли
+- При регистрации нового пользователя назначается роль client
+- Клиенты видят форму, менеджеры список заявок. Роли, права и ограничения по ТЗ.
+- Админы видят дашборд со ссылками на списки пользователей, ролей, заявок, форму заявок.
+  Могут назначать роли пользователям на детальной странице.
+
+###Тестовое задание:
 
 Необходимо реализовать форму обратной связи на Laravel или Yii2:
 
