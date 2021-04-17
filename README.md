@@ -4,14 +4,15 @@
    `git clone https://github.com/muri9/laraform`  
    `cd laraform`  
    `composer install`  
-1. Запустить контейнер с БД  
+2. Запустить контейнер с БД  
    `docker-compose up -d`  
    или настроить в .env подключение к своей БД
-1. Выполнить миграции  
-`php artisan config:clear`  
-`php artisan migrate`
-1. Запустить веб сервер, если требуется  
-`php artisan serve`
+3. Выполнить миграции  
+    `php artisan config:clear`  
+    `php artisan migrate`
+4. Запустить веб сервер, если требуется  
+    `php artisan serve`  
+   Открыть http://localhost:8000/
 
 Логин и пароль менеджера  
 `manager@example.com manager-pw`  
