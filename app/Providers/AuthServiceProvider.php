@@ -44,5 +44,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('claims-index', function (User $user) {
             return $user->hasRole(Role::MANAGER);
         });
+        Gate::define('admin', function (User $user) {
+            return $user->hasRole(Role::ADMIN);
+        });
     }
 }

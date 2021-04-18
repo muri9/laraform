@@ -17,6 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $items = User::orderBy('id', 'desc')->paginate(10);
         return view('users.index', ['items'=>$items]);
     }
@@ -50,6 +51,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('admin');
         return view('users.show', ['item'=>$user, 'roles'=> Role::all()]);
     }
 
@@ -61,6 +63,7 @@ class UserController extends Controller
      */
     public function role(User $user, Role $role)
     {
+        $this->authorize('admin');
         $res = $user->roles()->toggle($role->id);
         if (!empty($res['detached'])) $msg = "Role $role->title detached";
         if (!empty($res['attached'])) $msg = "Role $role->title assigned";
